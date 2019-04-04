@@ -13,12 +13,10 @@
             "servers": {
               "tomcat8-debug": {
                 "port": "8000",
-                "attributes": {},
                 "protocol": "http"
               },
               "tomcat8": {
                 "port": "8080",
-                "attributes": {},
                 "protocol": "http"
               }
             },
@@ -36,8 +34,7 @@
               "org.eclipse.che.ws-agent",
               "org.eclipse.che.ls.java",	
               "com.redhat.bayesian.lsp"
-            ],
-            "env": {}
+            ]
           }
         },
         "recipe": {
@@ -48,17 +45,13 @@
     },
     "projects": [
       {
-        "links": [],
         "name": "sample-web-app",
-        "attributes": {},
         "type": "maven",
         "source": {
-          "type": "git",
-          "parameters": {}
+          "location": "https://github.com/edeandrea/SampleWebApp",
+          "type": "git"
         },
-        "path": "/",
-        "problems": [],
-        "mixins": []
+        "path": "/"
       }
     ],
     "name": "sample-web-app",
@@ -118,8 +111,7 @@
         },
         "type": "mvn"
       }
-    ],
-    "links": []
+    ]
   },
   "ide": {
   	"onProjectsLoaded": {
