@@ -51,7 +51,7 @@
           "location": "https://github.com/edeandrea/SampleWebApp",
           "type": "git"
         },
-        "path": "/"
+        "path": "/sample-web-app"
       }
     ],
     "name": "sample-web-app",
