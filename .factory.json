@@ -1,0 +1,136 @@
+{
+  "v": "4.0",
+  "name": "sample-web-app",
+  "workspace": {
+    "defaultEnv": "default",
+    "environments": {
+      "default": {
+        "machines": {
+          "dev-machine": {
+            "attributes": {
+              "memoryLimitBytes": "2147483648"
+            },
+            "servers": {
+              "tomcat8-debug": {
+                "port": "8000",
+                "attributes": {},
+                "protocol": "http"
+              },
+              "tomcat8": {
+                "port": "8080",
+                "attributes": {},
+                "protocol": "http"
+              }
+            },
+            "volumes": {
+              "m2": {
+                "path": "/home/jboss/.m2"
+              },
+              "javadata": {
+                "path": "/home/jboss/jdtls/data"
+              }
+            },
+            "installers": [
+              "org.eclipse.che.exec",
+              "org.eclipse.che.terminal",
+              "org.eclipse.che.ws-agent",
+              "org.eclipse.che.ls.java",	
+              "com.redhat.bayesian.lsp"
+            ],
+            "env": {}
+          }
+        },
+        "recipe": {
+          "type": "dockerimage",
+          "content": "edeandrea/stacks-java-tomcat8"
+        }
+      }
+    },
+    "projects": [
+      {
+        "links": [],
+        "name": "SampleWebApp",
+        "attributes": {},
+        "type": "maven",
+        "path": "/",
+        "problems": [],
+        "mixins": []
+      }
+    ],
+    "name": "sample-web-app",
+    "attributes": {},
+    "commands": [
+      {
+        "commandLine": "mvn clean install -f ${current.project.path}/pom.xml",
+        "name": "build",
+        "attributes": {
+          "goal": "Build",
+          "previewUrl": ""
+        },
+        "type": "mvn"
+      },
+      {
+        "commandLine": "${HOME}/stack-analysis.sh -f ${current.project.path}/pom.xml -p ${current.project.path}",
+        "name": "dependency_analysis",
+        "attributes": {
+          "goal": "Run",
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "$TOMCAT_HOME/bin/shutdown.sh",
+        "name": "stopTomcat",
+        "attributes": {
+          "goal": "Run",
+          "previewUrl": ""
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "$TOMCAT_HOME/bin/startup.sh",
+        "name": "startTomcat",
+        "attributes": {
+          "goal": "Run",
+          "previewUrl": "${server.tomcat8}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "$TOMCAT_HOME/bin/shutdown.sh && $TOMCAT_HOME/bin/startup.sh",
+        "name": "restartTomcat",
+        "attributes": {
+          "goal": "Run",
+          "previewUrl": "${server.tomcat8}"
+        },
+        "type": "custom"
+      },
+      {
+        "commandLine": "mvn clean install -f ${current.project.path}/pom.xml && cp ${current.project.path}/target/*.war $TOMCAT_HOME/webapps/ROOT.war",
+        "name": "deploy",
+        "attributes": {
+          "goal": "Deploy",
+          "previewUrl": "${server.tomcat8}"
+        },
+        "type": "mvn"
+      }
+    ],
+    "links": []
+  },
+  "ide": {
+  	"onProjectsLoaded": {
+  		"actions": [
+  			{
+  				"id": "runCommand",
+  				"properties": {
+  					"name": "startTomcat"
+  				}
+  			}
+  		]
+  	}
+  },
+  "creator": {
+    "name": "Eric Deandrea",
+    "email": "edeandrea@redhat.com"
+  }
+}
