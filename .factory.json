@@ -45,18 +45,7 @@
           "content": "edeandrea/stacks-java-tomcat8"
         }
       }
-    },
-    "projects": [
-      {
-        "links": [],
-        "name": "SampleWebApp",
-        "attributes": {},
-        "type": "maven",
-        "path": "/",
-        "problems": [],
-        "mixins": []
-      }
-    ],
+    }
     "name": "sample-web-app",
     "attributes": {},
     "commands": [
