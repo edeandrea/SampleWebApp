@@ -46,11 +46,7 @@
     "projects": [
       {
         "name": "sample-web-app",
-        "type": "maven",
-        "source": {
-          "location": "https://github.com/edeandrea/SampleWebApp",
-          "type": "git"
-        },
+        "type": "maven"
         "path": "/sample-web-app"
       }
     ],
