@@ -46,7 +46,7 @@
     "projects": [
       {
         "name": "sample-web-app",
-        "type": "maven"
+        "type": "maven",
         "path": "/sample-web-app"
       }
     ],
